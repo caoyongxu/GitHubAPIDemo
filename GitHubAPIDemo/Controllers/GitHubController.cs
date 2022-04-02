@@ -29,7 +29,9 @@ namespace GitHubAPIDemo.Controllers
 
 
         [HttpGet("commit")]
-        public async Task<IActionResult> GetCommit(string commitHash, string directory="")
+        public async Task<IActionResult> GetCommit(
+            string commitHash= "d92ce2adf403add16c2c426d6e62a56c84f08eba"
+            , string directory="")
         {
             if (commitHash.IsEmptyString())
             {

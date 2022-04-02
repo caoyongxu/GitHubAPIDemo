@@ -267,8 +267,8 @@ namespace GitHubAPIDemo.Services
                     {
                         Name = name.Key,
                         BlogSectionName = name.Value,
-                        ObjectId = (string)repository["repository"][name.Key]["oid"],
-                        Text = (string)repository["repository"][name.Key]["text"]
+                        ObjectId = (string)repository["repository"][name.Key],
+                        Text = (string)repository["repository"][name.Key]
 
                     };
                     articles.Add(articleDto);
@@ -346,7 +346,9 @@ namespace GitHubAPIDemo.Services
             string fileName = pathParts.LastOrDefault();
             string fileExtension = Path.GetExtension(fileName);
 
-            fileName = pathParts.LastOrDefault().Replace(fileExtension, "");
+            fileName = fileExtension.Length>0?
+                pathParts.LastOrDefault().Replace(fileExtension, "")
+                : fileName;
             fileName = new string(fileName.Where(c => char.IsLetterOrDigit(c) || c == '_').ToArray());
 
             var indexOfBlob = Array.IndexOf(pathParts, "blob");
